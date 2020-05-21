@@ -10,8 +10,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServerHttpResponse;
+import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +35,7 @@ public class EmployeesController {
     }*/
     @GetMapping
     private List<Employees> list() {
+
 
         return employeesRepository.findAll();
 

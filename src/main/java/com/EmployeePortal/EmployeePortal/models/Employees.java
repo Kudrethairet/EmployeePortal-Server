@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
+
 @Entity(name="employees")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employees {
@@ -12,6 +14,10 @@ public class Employees {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employee_id;
 
+
+
+
+
     public Long getEmployee_id() {
         return employee_id;
     }
@@ -19,6 +25,7 @@ public class Employees {
     public void setEmployee_id(Long EMPLOYEE_ID) {
         this.employee_id = EMPLOYEE_ID;
     }
+
 
     public String getFirst_name() {
         return first_name;
@@ -112,5 +119,7 @@ public class Employees {
     private Integer commission_pct;
     private Integer manager_id;
     private Integer department_id;
+
+
 
 }
