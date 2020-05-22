@@ -5,6 +5,7 @@ import com.EmployeePortal.EmployeePortal.models.Employees;
 import com.EmployeePortal.EmployeePortal.repositories.EmployeesRepository;
 import org.apache.coyote.Response;
 import org.aspectj.bridge.Message;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -35,16 +36,19 @@ public class EmployeesController {
     }*/
     @GetMapping
     private List<Employees> list() {
+        List<Employees> l = new ArrayList<>();
 
 
-        return employeesRepository.findAll();
-
+      //  return employeesRepository.findAll();
+       return employeesRepository.findByFirstName();
+        //return employeesRepository.findWithJobTitle();
 
     }
     @GetMapping("/{id}")
     public Employees get(@PathVariable("id") long id){
-        return employeesRepository.getOne(id);
-   }
+     return employeesRepository.getOne(id);
+         //return  employeesRepository.findSingleJobTitle(id);
+    }
 
 
     @PostMapping
@@ -67,6 +71,13 @@ public class EmployeesController {
             employeesRepository.save(employee);
             return employeesRepository.saveAndFlush(employee);
       }
+    }
+
+    @RequestMapping(value="{id}", method = RequestMethod.PUT)
+    public Employees update(@PathVariable Long id, @RequestBody Employees employees){
+        Employees existEmployee = employeesRepository.getOne(id);
+        BeanUtils.copyProperties(employees, existEmployee);
+        return employeesRepository.saveAndFlush(employees);
     }
 
     public boolean CheckEmail(String email){

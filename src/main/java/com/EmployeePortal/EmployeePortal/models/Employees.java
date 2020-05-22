@@ -120,6 +120,4 @@ public class Employees {
     private Integer manager_id;
     private Integer department_id;
 
-
-
 }
